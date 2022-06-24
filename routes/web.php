@@ -21,6 +21,21 @@ Route::get('/laravel', function () {
    return view('laravel');
 });
 
+Route::get("/blog", function () {
+
+    return view('blog');
+});
+
+Route::get("/post/{id}", function ($id){
+    if(!is_numeric($id)) return redirect("/");
+    $posts = json_decode(file_get_contents(__DIR__ . "\posts.json"), true);
+    $key = array_search(+$id, array_map(function ($post) {return $post["id"];}, $posts));
+    if($key === false) return redirect("/");
+    return view('post', [
+        'post' => $posts[$key]
+    ]);
+});
+
 Route::get('/hello', function () {
     return "Hello World";
 });
