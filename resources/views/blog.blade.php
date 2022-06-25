@@ -12,17 +12,11 @@
     <link rel="stylesheet" href="/blog.css">
 </head>
 <body>
+<?php foreach ($posts as $post): ?>
     <article>
-        <h1><a href="/post">The first blog post</a></h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad deleniti deserunt dicta doloribus ducimus, est eum explicabo in ipsum iusto, mollitia natus nesciunt nihil nobis quae quaerat quidem sed suscipit voluptate. A ad aliquam, cumque cupiditate dicta doloremque dolorum eius esse fugiat id incidunt ipsum iste itaque iure magnam modi molestiae nemo neque omnis optio pariatur placeat praesentium quia ratione sapiente sed similique sit soluta sunt velit voluptatem voluptatum.</p>
+        <h1><a href="/post/<?= $post["id"] ?>"><?= $post["title"] ?></a></h1>
+        <p><?= $post["body"] ?></p>
     </article>
-    <article>
-        <h1><a href="/post">The second blog post</a></h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad deleniti deserunt dicta doloribus ducimus, est eum explicabo in ipsum iusto, mollitia natus nesciunt nihil nobis quae quaerat quidem sed suscipit voluptate. A ad aliquam, cumque cupiditate dicta doloremque dolorum eius esse fugiat id incidunt ipsum iste itaque iure magnam modi molestiae nemo neque omnis optio pariatur placeat praesentium quia ratione sapiente sed similique sit soluta sunt velit voluptatem voluptatum.</p>
-    </article>
-    <article>
-        <h1><a href="/post">The third blog post</a></h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad deleniti deserunt dicta doloribus ducimus, est eum explicabo in ipsum iusto, mollitia natus nesciunt nihil nobis quae quaerat quidem sed suscipit voluptate. A ad aliquam, cumque cupiditate dicta doloremque dolorum eius esse fugiat id incidunt ipsum iste itaque iure magnam modi molestiae nemo neque omnis optio pariatur placeat praesentium quia ratione sapiente sed similique sit soluta sunt velit voluptatem voluptatum.</p>
-    </article>
+<?php endforeach; ?>
 </body>
 </html>

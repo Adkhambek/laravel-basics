@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,19 +23,19 @@ Route::get('/laravel', function () {
 });
 
 Route::get("/blog", function () {
-
-    return view('blog');
+    $posts = Post::findAll();
+    return view('blog', [
+        'posts' => $posts
+    ]);
 });
 
 Route::get("/post/{id}", function ($id){
-    if(!is_numeric($id)) return redirect("/");
-    $posts = json_decode(file_get_contents(__DIR__ . "\posts.json"), true);
-    $key = array_search(+$id, array_map(function ($post) {return $post["id"];}, $posts));
-    if($key === false) return redirect("/");
+
+    $post = Post::find($id);
     return view('post', [
-        'post' => $posts[$key]
+        'post' => $post
     ]);
-});
+})->whereNumber('id');
 
 Route::get('/hello', function () {
     return "Hello World";
