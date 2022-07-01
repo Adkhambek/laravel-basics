@@ -2,19 +2,10 @@
 
 namespace App\Models;
 
-class Post
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Post extends Model
 {
-    public static function find($id) {
-            $get_posts = json_decode(file_get_contents(__DIR__ . "\posts.json"), true);
-            $posts = cache()->remember("post.{id}", 1200, fn() => $get_posts);
-            $post_key = array_search(+$id, array_map(fn($post) => $post["id"], $posts));
-            if($post_key === false) return abort(404);
-            return $posts[$post_key];
-    }
-
-    public static function findAll()
-    {
-        return cache()->rememberForever("posts.all", fn() => json_decode(file_get_contents(__DIR__ . "\posts.json"), true));
-    }
-
+    use HasFactory;
 }
