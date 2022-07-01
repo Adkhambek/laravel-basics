@@ -23,15 +23,14 @@ Route::get('/laravel', function () {
 });
 
 Route::get("/blog", function () {
-    $posts = Post::findAll();
+    $posts = Post::all();
     return view('blog', [
         'posts' => $posts
     ]);
 });
 
-Route::get("/post/{id}", function ($id){
+Route::get("/post/{post:id}", function (Post $post){
 
-    $post = Post::find($id);
     return view('post', [
         'post' => $post
     ]);
