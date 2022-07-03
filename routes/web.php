@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
@@ -16,9 +17,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $posts = Post::all();
     return view('blog', [
-        'posts' => $posts
+        'posts' => Post::latest('id')->get()
     ]);
 });
 
@@ -29,8 +29,14 @@ Route::get("/posts/{post:id}", function (Post $post){
     ]);
 });
 
-Route::get("categories/{category}", function (Category $category) {
+Route::get("/categories/{category}", function (Category $category) {
     return view('blog', [
         'posts' => $category->posts
+    ]);
+});
+
+Route::get("/authors/{author}", function (User $author) {
+    return view('blog', [
+        'posts' => $author->posts
     ]);
 });
